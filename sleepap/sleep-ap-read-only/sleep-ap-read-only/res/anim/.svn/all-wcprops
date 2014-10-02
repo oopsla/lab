@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/3/trunk/res/anim
+END
+exitingtoleft.xml
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/3/trunk/res/anim/exitingtoleft.xml
+END
+exitingtoright.xml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3/trunk/res/anim/exitingtoright.xml
+END
+enteringfromleft.xml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/trunk/res/anim/enteringfromleft.xml
+END
+enteringfromright.xml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3/trunk/res/anim/enteringfromright.xml
+END

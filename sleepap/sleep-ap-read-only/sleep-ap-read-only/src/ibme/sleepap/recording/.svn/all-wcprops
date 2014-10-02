@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording
+END
+ChooseSignals.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/ChooseSignals.java
+END
+TutorialPulseOx.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/TutorialPulseOx.java
+END
+TutorialChecks.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/TutorialChecks.java
+END
+SignalsRecorder.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/SignalsRecorder.java
+END
+TutorialMicrophone.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/TutorialMicrophone.java
+END
+ExtAudioRecorder.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/ExtAudioRecorder.java
+END
+NoninPacket.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/NoninPacket.java
+END
+NoninManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/NoninManager.java
+END
+TutorialPhone.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/TutorialPhone.java
+END
+PreRecordingChecklist.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/4/trunk/src/ibme/sleepap/recording/PreRecordingChecklist.java
+END

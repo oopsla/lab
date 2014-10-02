@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- OSA 위험 설문 조사 -->
+    <string name="sb0">폐쇄성 수면 무호흡증을 평가하는 간단한 설문입니다.</string>
+    <string name="sb1">1. 코를 크게 곱니까?</string>
+    <string name="sb2">2. 가끔씩 하루동안 피곤하십니까?</string>
+    <string name="sb3">3. 다른 사람이 당신의 수면 중 호흡이 멈춘 것을 본 적 있습니까?</string>
+    <string name="sb4">4. 고혈압이 있으십니까?</string>
+    <string name="sb5">5. 신장과 체중을 입력해주세요.</string>
+    <string name="sb6">6. 나이를 입력하세요.</string>
+    <string name="sb7">7. 목의 둘레를 입력하세요.</string>
+    <string name="sb8">8. 성별을 고르세요.</string>
+    <string name="sb9">9. 인종은 무엇입니까?</string>
+    
+    <!-- 확인 -->
+    <string name="yes">네</string>
+    <string name="no">아니요</string>
+    
+    <string name="fenale">여자</string>
+    <string name="male">남자</string>
+    
+     <string name="start">시작</string>
+     <string name="app_name">sleep monitoring</string>
+     
+     <!-- 메인  -->
+     <string name="main_button1">모니터링</string>
+     <string name="main_button2">데이터 분석</string>
+     <string name="main_button3">설정 화면</string>
+     
+</resources>
