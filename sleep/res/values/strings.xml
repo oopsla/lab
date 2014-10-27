@@ -7,25 +7,101 @@
     <string name="sb2">2. 가끔씩 하루동안 피곤하십니까?</string>
     <string name="sb3">3. 다른 사람이 당신의 수면 중 호흡이 멈춘 것을 본 적 있습니까?</string>
     <string name="sb4">4. 고혈압이 있으십니까?</string>
-    <string name="sb5">5. 신장과 체중을 입력해주세요.</string>
+    <string name="sb5">5. 신장(cm)과 체중(kg)을 입력해주세요.</string>
     <string name="sb6">6. 나이를 입력하세요.</string>
-    <string name="sb7">7. 목의 둘레를 입력하세요.</string>
+    <string name="sb7">7. 목의 둘레(cm)를 입력하세요.</string>
     <string name="sb8">8. 성별을 고르세요.</string>
     <string name="sb9">9. 인종은 무엇입니까?</string>
-    
+
     <!-- 확인 -->
     <string name="yes">네</string>
     <string name="no">아니요</string>
-    
-    <string name="fenale">여자</string>
+    <string name="female">여자</string>
     <string name="male">남자</string>
-    
-     <string name="start">시작</string>
-     <string name="app_name">sleep monitoring</string>
-     
-     <!-- 메인  -->
-     <string name="main_button1">모니터링</string>
-     <string name="main_button2">데이터 분석</string>
-     <string name="main_button3">설정 화면</string>
-     
+    <string name="start">시작</string>
+    <string name="app_name">Sleep Monitoring</string>
+
+    <!-- 메인 -->
+    <string name="main_button1">모니터링</string>
+    <string name="main_button2">데이터 분석</string>
+    <string name="main_button3">개인정보변경</string>
+
+    <!-- 메뉴 -->
+    <string name="menu_button1">시간지연설정</string>
+    <string name="menu_button2">수면시간설정</string>
+    <string name="menu_button3">배터리제한설정</string>
+
+    <!-- 설정 -->
+    <string name="delay_txt">기록을 시작하기 전의 지연 시간을 설정하십시오.(단위:분)</string>
+    <string name="duration_txt">수면시간을 설정하십시오.(단위:분)</string>
+    <string name="battery_txt">어플리케이션 실행이 가능한 최소 배터리 용량을 설정하십시오.(단위:%)</string>
+    <string name="str_btn_chart"> 버튼</string>
+
+    <!-- 모니터링 셋 -->
+    <string name="delayTimeset">시간지연설정 : </string>
+    <string name="duringTimeset">수면시간설정 : </string>
+    <string name="minute">분</string>
+    <!-- 모니터링 -->
+    <string name="recordingLabel">레코딩</string>
+    <string name="accelerometerLabel">가속도 센서</string>
+    <string name="positionLabel">자세</string>
+    <string name="audioLabel">마이크 센서</string>
+    <string name="apneaLabel">무호흡 횟수:</string>
+    <string name="reconnectButtonText">다시연결</string>
+    <string name="stopButtonText">정지</string>
+    <string name="startedRecordingNotification">현재 레코딩</string>
+    <string name="finishedAlertTitle">정지됨</string>
+    <string name="finishedAlertFailure">녹음을 중지되었습니다."\n"기록된 파일이 삭제됩니다.</string>
+    <string name="finishedAlertSuccess">녹음이 성공적으로 완료되었습니다.</string>
+    <string name="analyseButtonText">분석</string>
+    <string name="mainMenuButtonText">메인 메뉴</string>
+    <string name="delayAlertTitle">기록</string>
+    <string name="delayAlertMessage1">녹음이 시작됩니다. </string>
+    <string name="delayAlertMessage2"> minute(s).</string> <!-- ??? -->
+    <string name="ok">확인</string>
+    <string name="estimatedPosition">예상 자세:</string>
+    <string name="mac_address">MAC 주소</string>
+   
+    <!-- 분석 -->
+    <string name="dataChoiceInstructions">분석에 사용할 데이터를 선택하세요.</string>
+    <string name="movementLabel">자세</string>
+    <string name="demographicsLabel">설문 답변</string>
+    <string name="ppgLabel">PPG</string>
+    <string name="o2satLabel">산소 포화도</string>
+    <string name="nextButtonText">다음</string>
+    <string name="analysisResults">분석 결과</string>
+    <string name="processingData">데이터 처리중&#8230;</string> <!-- ??? -->
+    <string name="thermometer">온도계</string>
+    <string name="detailedResults">자세한 결과</string>
+    <string name="arrow">화살표</string>
+    <string name="odiDefaultScore">ODI:</string>
+    <string name="fileListTitle">분석할 기록 선택</string>
+    <string name="noFilesFoundText">분석하기 전에 데이터 기록을 확인하세요.</string>
+    <string name="on">on</string>
+    <string name="annalysis_result">분석 결과</string>
+    <string name="osa_result">OSA 결과 : </string>
+    <string name="percent">"%"</string>
+    <string name="audioAnalysisDone">\nAudio: done.</string>
+    <string name="actigraphyAnalysisDone">\nActigraphy: done.</string>
+    <string name="stopBangDefaultScore">Questionnaire:</string>
+    <string name="demographicsAnalysisDone">\nDemographics: done.</string>
+    <string name="questionOutput">질문지 점수: </string>
+    <string name="svmDefaultScore">위험도:</string>
+    <string name="help">Help</string>
+    <string name="cloudDefaultScore">Cloud:</string>
+    <string name="cloudButtonText">Perform cloud analysis</string>
+    <string name="odiHelpTitle">ODI</string>
+    <string name="stopBangHelpTitle">Questionnaire</string>
+    <string name="svmHelpTitle">위험도</string>
+    <string name="cloudHelpTitle">Cloud</string>
+    <string name="odiHelpMessage">Oxygen Desaturation Index (ODI) is a measure of how often the amount of oxygen in your blood dips below normal. This happens frequently to OSA patients. An ODI of 5 or above means that you are at high risk of OSA.</string>
+    <string name="stopBangHelpMessage">The questionnaire is used to screen for obstructive sleep apnoea (OSA). It can be used as a first layer of screening for OSA, but by itself it is not sufficient for any diagnostic purposes. A score of 3 or above means you are at high risk of OSA.</string>
+    <string name="svmHelpMessage">수면 데이터를 바탕으로 OSA의 위험도를 계산하여 OSA를 가지고 있는지 아닌지 판단합니다.</string>
+    <string name="cloudHelpMessage">If you wish you can upload your data for it to be analysed remotely. To do so, tap \"Perform cloud analysis\" below.</string>
+    <string name="loadingMessage">분석 시작.</string>
+    <string name="loading">Analysing&#8230;</string>
+    <string name="odiAnalysisDone">\nODI: done.</string>
+    <string name="atRisk">OSA의 위험이 있습니다.</string>
+    <string name="notAtRisk">OSA의 위험이 없습니다.</string>
+
 </resources>

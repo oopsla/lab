@@ -1,0 +1,18 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/recordDelay"
+        android:title="@string/menu_button1"
+        android:orderInCategory="1"
+        />
+    <item 
+        android:id="@+id/recordDuration"
+        android:title="@string/menu_button2"
+        android:orderInCategory="2"
+        />
+    <item 
+        android:id="@+id/battery"
+        android:title="@string/menu_button3"
+        android:orderInCategory="3"
+        />
+</menu>

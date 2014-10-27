@@ -8,7 +8,26 @@
 package com.example.sleepap;
 
 public final class R {
+    public static final class anim {
+        public static final int enteringfromleft=0x7f040000;
+        public static final int enteringfromright=0x7f040001;
+        public static final int exitingtoleft=0x7f040002;
+        public static final int exitingtoright=0x7f040003;
+    }
     public static final class attr {
+    }
+    public static final class color {
+        public static final int alertdialogbuttonpressedcolor=0x7f06000a;
+        public static final int black=0x7f060001;
+        public static final int darkgreen=0x7f060003;
+        public static final int darkgrey=0x7f060004;
+        public static final int darkred=0x7f060002;
+        public static final int translucentBlue=0x7f060007;
+        public static final int translucentDarkGreen=0x7f060008;
+        public static final int translucentRed=0x7f060006;
+        public static final int transparent=0x7f060005;
+        public static final int white=0x7f060000;
+        public static final int windowBackground=0x7f060009;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -17,64 +36,267 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
-        public static final int background=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int actionhelp=0x7f020000;
+        public static final int analyse=0x7f020001;
+        public static final int analyseresult=0x7f020002;
+        public static final int analysetxt=0x7f020003;
+        public static final int back=0x7f020004;
+        public static final int back1=0x7f020005;
+        public static final int back2=0x7f020006;
+        public static final int back3=0x7f020007;
+        public static final int background=0x7f020008;
+        public static final int buttonstop=0x7f020009;
+        public static final int changeinfo=0x7f02000a;
+        public static final int detailresult=0x7f02000b;
+        public static final int deviceaccessmic=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int metric_border=0x7f02000e;
+        public static final int monitoring=0x7f02000f;
+        public static final int navigationcollapse=0x7f020010;
+        public static final int navigationexpand=0x7f020011;
+        public static final int nextbutton=0x7f020012;
+        public static final int notification_icon=0x7f020013;
+        public static final int ok_btn=0x7f020014;
+        public static final int record=0x7f020015;
+        public static final int recordselect=0x7f020016;
+        public static final int resultgraph=0x7f020017;
+        public static final int rexulttxt=0x7f020018;
+        public static final int selecttxt=0x7f020019;
+        public static final int start=0x7f02001a;
+        public static final int survey=0x7f02001b;
+        public static final int thermometer=0x7f02001c;
     }
     public static final class id {
-        public static final int Activity_Question_age=0x7f07000d;
-        public static final int Activity_Question_breath_n=0x7f070008;
-        public static final int Activity_Question_breath_y=0x7f070007;
-        public static final int Activity_Question_fatigue_n=0x7f070006;
-        public static final int Activity_Question_fatigue_y=0x7f070005;
-        public static final int Activity_Question_fenale=0x7f07000f;
-        public static final int Activity_Question_height=0x7f07000b;
-        public static final int Activity_Question_high_blood_pressure_n=0x7f07000a;
-        public static final int Activity_Question_high_blood_pressure_y=0x7f070009;
-        public static final int Activity_Question_male=0x7f070010;
-        public static final int Activity_Question_neck=0x7f07000e;
-        public static final int Activity_Question_nose_n=0x7f070004;
-        public static final int Activity_Question_nose_y=0x7f070003;
-        public static final int Activity_Question_start_btn=0x7f070011;
-        public static final int Activity_Question_weight=0x7f07000c;
-        public static final int MainActivity_analysis_btn=0x7f070001;
-        public static final int MainActivity_monitoring_btn=0x7f070000;
-        public static final int MainActivity_setup_btn=0x7f070002;
+        public static final int Activity_Question_age=0x7f0b0040;
+        public static final int Activity_Question_breath_n=0x7f0b0037;
+        public static final int Activity_Question_breath_y=0x7f0b0036;
+        public static final int Activity_Question_fatigue_n=0x7f0b0033;
+        public static final int Activity_Question_fatigue_y=0x7f0b0032;
+        public static final int Activity_Question_fenale=0x7f0b0045;
+        public static final int Activity_Question_height=0x7f0b003d;
+        public static final int Activity_Question_high_blood_pressure_n=0x7f0b003b;
+        public static final int Activity_Question_high_blood_pressure_y=0x7f0b003a;
+        public static final int Activity_Question_male=0x7f0b0046;
+        public static final int Activity_Question_neck=0x7f0b0042;
+        public static final int Activity_Question_nose_n=0x7f0b002f;
+        public static final int Activity_Question_nose_y=0x7f0b002e;
+        public static final int Activity_Question_start_btn=0x7f0b0047;
+        public static final int Activity_Question_weight=0x7f0b003e;
+        public static final int MainActivity_analysis_btn=0x7f0b0017;
+        public static final int MainActivity_changeInfo_btn=0x7f0b0018;
+        public static final int MainActivity_monitoring_btn=0x7f0b0016;
+        public static final int aH_apnea=0x7f0b0008;
+        public static final int activityDisplay=0x7f0b0002;
+        public static final int activityPlot=0x7f0b0003;
+        public static final int activity_monitoring_set_ok=0x7f0b000d;
+        public static final int activity_monitoring_set_timeDelay=0x7f0b000b;
+        public static final int activity_monitoring_set_timeDuring=0x7f0b000c;
+        public static final int apnea=0x7f0b0007;
+        public static final int audioDisplay=0x7f0b0005;
+        public static final int audioPlot=0x7f0b0006;
+        public static final int battery=0x7f0b004e;
+        public static final int btn_chart=0x7f0b000f;
+        public static final int buttonStop=0x7f0b0009;
+        public static final int cloudButton=0x7f0b002b;
+        public static final int cloudHelp=0x7f0b002a;
+        public static final int cloudOutput=0x7f0b0029;
+        public static final int cloudOutputContainer=0x7f0b0028;
+        public static final int detailedResults=0x7f0b001e;
+        public static final int detailedResultsExpand=0x7f0b001d;
+        public static final int detailedResultsTitle=0x7f0b001c;
+        public static final int linearLayout1=0x7f0b0048;
+        public static final int nextButton=0x7f0b0015;
+        public static final int noFilesFound=0x7f0b004b;
+        public static final int odi=0x7f0b0020;
+        public static final int odiContainer=0x7f0b001f;
+        public static final int odiHelp=0x7f0b0021;
+        public static final int opt_PPG=0x7f0b0013;
+        public static final int opt_actigraphy=0x7f0b0010;
+        public static final int opt_audio=0x7f0b0011;
+        public static final int opt_demographics=0x7f0b0012;
+        public static final int opt_o2Sat=0x7f0b0014;
+        public static final int overallRisk=0x7f0b001a;
+        public static final int position=0x7f0b0004;
+        public static final int radioGroup1=0x7f0b002d;
+        public static final int radioGroup2=0x7f0b0031;
+        public static final int radioGroup3=0x7f0b0035;
+        public static final int radioGroup4=0x7f0b0039;
+        public static final int radioGroup5=0x7f0b0044;
+        public static final int recordDelay=0x7f0b004c;
+        public static final int recordDuration=0x7f0b004d;
+        public static final int recordingSign=0x7f0b0001;
+        public static final int recordlistView=0x7f0b000e;
+        public static final int results_fileListLL=0x7f0b004a;
+        public static final int spinnerBluetooth=0x7f0b000a;
+        public static final int stopBang=0x7f0b0023;
+        public static final int stopBangContainer=0x7f0b0022;
+        public static final int stopBangHelp=0x7f0b0024;
+        public static final int stopbang1question=0x7f0b002c;
+        public static final int stopbang2question=0x7f0b0030;
+        public static final int stopbang3question=0x7f0b0034;
+        public static final int stopbang4question=0x7f0b0038;
+        public static final int stopbang5question=0x7f0b003c;
+        public static final int stopbang6question=0x7f0b003f;
+        public static final int stopbang7question=0x7f0b0041;
+        public static final int stopbang8question=0x7f0b0043;
+        public static final int svmHelp=0x7f0b0027;
+        public static final int svmOutput=0x7f0b0026;
+        public static final int svmOutputContainer=0x7f0b0025;
+        public static final int textView1=0x7f0b0019;
+        public static final int textView2=0x7f0b0049;
+        public static final int thermometer=0x7f0b001b;
+        public static final int title=0x7f0b0000;
     }
     public static final class layout {
-        public static final int loading=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int question=0x7f030002;
+        public static final int activity_monitoring=0x7f030000;
+        public static final int activity_monitoring_set=0x7f030001;
+        public static final int analyse=0x7f030002;
+        public static final int analyse2=0x7f030003;
+        public static final int choose_data=0x7f030004;
+        public static final int loading=0x7f030005;
+        public static final int main=0x7f030006;
+        public static final int perform_analysis=0x7f030007;
+        public static final int question=0x7f030008;
+        public static final int record=0x7f030009;
+        public static final int recordings_list=0x7f03000a;
+    }
+    public static final class menu {
+        public static final int setup_menu=0x7f0a0000;
+    }
+    public static final class raw {
+        public static final int act_svm=0x7f050000;
+        public static final int actaud_svm=0x7f050001;
+        public static final int actauddemo_svm=0x7f050002;
+        public static final int actauddemoodi_svm=0x7f050003;
+        public static final int actaudodi_svm=0x7f050004;
+        public static final int actdemo_svm=0x7f050005;
+        public static final int actdemoodi_svm=0x7f050006;
+        public static final int actodi_svm=0x7f050007;
+        public static final int apnoeic=0x7f050008;
+        public static final int aud_svm=0x7f050009;
+        public static final int auddemo_svm=0x7f05000a;
+        public static final int auddemoodi_svm=0x7f05000b;
+        public static final int audodi_svm=0x7f05000c;
+        public static final int demo_svm=0x7f05000d;
+        public static final int demoodi_svm=0x7f05000e;
+        public static final int normal=0x7f05000f;
+        public static final int odi_svm=0x7f050010;
+        public static final int snorer=0x7f050011;
+        public static final int svmstruct=0x7f050012;
     }
     public static final class string {
-        public static final int app_name=0x7f05000f;
-        public static final int fenale=0x7f05000c;
-        /**  메인  
+        public static final int accelerometerLabel=0x7f08001e;
+        public static final int actigraphyAnalysisDone=0x7f080043;
+        public static final int analyseButtonText=0x7f080028;
+        public static final int analysisResults=0x7f080036;
+        public static final int annalysis_result=0x7f08003f;
+        public static final int apneaLabel=0x7f080021;
+        public static final int app_name=0x7f08000f;
+        public static final int arrow=0x7f08003a;
+        public static final int atRisk=0x7f080056;
+        public static final int audioAnalysisDone=0x7f080042;
+        public static final int audioLabel=0x7f080020;
+        public static final int battery_txt=0x7f080018;
+        public static final int cloudButtonText=0x7f08004a;
+        public static final int cloudDefaultScore=0x7f080049;
+        public static final int cloudHelpMessage=0x7f080052;
+        public static final int cloudHelpTitle=0x7f08004e;
+        /**  분석 
          */
-        public static final int main_button1=0x7f050010;
-        public static final int main_button2=0x7f050011;
-        public static final int main_button3=0x7f050012;
-        public static final int male=0x7f05000d;
-        public static final int no=0x7f05000b;
+        public static final int dataChoiceInstructions=0x7f080030;
+        public static final int delayAlertMessage1=0x7f08002b;
+        public static final int delayAlertMessage2=0x7f08002c;
+        public static final int delayAlertTitle=0x7f08002a;
+        /**  모니터링 셋 
+         */
+        public static final int delayTimeset=0x7f08001a;
+        /**  설정 
+         */
+        public static final int delay_txt=0x7f080016;
+        public static final int demographicsAnalysisDone=0x7f080045;
+        public static final int demographicsLabel=0x7f080032;
+        public static final int detailedResults=0x7f080039;
+        public static final int duration_txt=0x7f080017;
+        public static final int duringTimeset=0x7f08001b;
+        public static final int estimatedPosition=0x7f08002e;
+        public static final int female=0x7f08000c;
+        public static final int fileListTitle=0x7f08003c;
+        public static final int finishedAlertFailure=0x7f080026;
+        public static final int finishedAlertSuccess=0x7f080027;
+        public static final int finishedAlertTitle=0x7f080025;
+        public static final int help=0x7f080048;
+        public static final int loading=0x7f080054;
+        public static final int loadingMessage=0x7f080053;
+        public static final int mac_address=0x7f08002f;
+        public static final int mainMenuButtonText=0x7f080029;
+        /**  메인 
+         */
+        public static final int main_button1=0x7f080010;
+        public static final int main_button2=0x7f080011;
+        public static final int main_button3=0x7f080012;
+        public static final int male=0x7f08000d;
+        /**  메뉴 
+         */
+        public static final int menu_button1=0x7f080013;
+        public static final int menu_button2=0x7f080014;
+        public static final int menu_button3=0x7f080015;
+        public static final int minute=0x7f08001c;
+        public static final int movementLabel=0x7f080031;
+        public static final int nextButtonText=0x7f080035;
+        public static final int no=0x7f08000b;
+        public static final int noFilesFoundText=0x7f08003d;
+        public static final int notAtRisk=0x7f080057;
+        public static final int o2satLabel=0x7f080034;
+        public static final int odiAnalysisDone=0x7f080055;
+        public static final int odiDefaultScore=0x7f08003b;
+        public static final int odiHelpMessage=0x7f08004f;
+        public static final int odiHelpTitle=0x7f08004b;
+        /**  ??? 
+         */
+        public static final int ok=0x7f08002d;
+        public static final int on=0x7f08003e;
+        public static final int osa_result=0x7f080040;
+        public static final int percent=0x7f080041;
+        public static final int positionLabel=0x7f08001f;
+        public static final int ppgLabel=0x7f080033;
+        public static final int processingData=0x7f080037;
+        public static final int questionOutput=0x7f080046;
+        public static final int reconnectButtonText=0x7f080022;
+        /**  모니터링 
+         */
+        public static final int recordingLabel=0x7f08001d;
         /**  OSA 위험 설문 조사 
          */
-        public static final int sb0=0x7f050000;
-        public static final int sb1=0x7f050001;
-        public static final int sb2=0x7f050002;
-        public static final int sb3=0x7f050003;
-        public static final int sb4=0x7f050004;
-        public static final int sb5=0x7f050005;
-        public static final int sb6=0x7f050006;
-        public static final int sb7=0x7f050007;
-        public static final int sb8=0x7f050008;
-        public static final int sb9=0x7f050009;
-        public static final int start=0x7f05000e;
+        public static final int sb0=0x7f080000;
+        public static final int sb1=0x7f080001;
+        public static final int sb2=0x7f080002;
+        public static final int sb3=0x7f080003;
+        public static final int sb4=0x7f080004;
+        public static final int sb5=0x7f080005;
+        public static final int sb6=0x7f080006;
+        public static final int sb7=0x7f080007;
+        public static final int sb8=0x7f080008;
+        public static final int sb9=0x7f080009;
+        public static final int start=0x7f08000e;
+        public static final int startedRecordingNotification=0x7f080024;
+        public static final int stopBangDefaultScore=0x7f080044;
+        public static final int stopBangHelpMessage=0x7f080050;
+        public static final int stopBangHelpTitle=0x7f08004c;
+        public static final int stopButtonText=0x7f080023;
+        public static final int str_btn_chart=0x7f080019;
+        public static final int svmDefaultScore=0x7f080047;
+        public static final int svmHelpMessage=0x7f080051;
+        public static final int svmHelpTitle=0x7f08004d;
+        /**  ??? 
+         */
+        public static final int thermometer=0x7f080038;
         /**  확인 
          */
-        public static final int yes=0x7f05000a;
+        public static final int yes=0x7f08000a;
     }
     public static final class style {
         /** 
@@ -98,10 +320,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f090001;
     }
 }

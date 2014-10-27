@@ -3,26 +3,29 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/back" >
 
     <Button
         android:id="@+id/MainActivity_monitoring_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_button1" />
+        
+        android:background="@drawable/monitoring"/>
 
     <Button
         android:id="@+id/MainActivity_analysis_btn"
         android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_button2" />
+        
+		android:background="@drawable/analyse"/>
 
     <Button
-        android:id="@+id/MainActivity_setup_btn"
+        android:id="@+id/MainActivity_changeInfo_btn"
         android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_button3" />
+        android:background="@drawable/changeinfo"/>
 
 </LinearLayout>
