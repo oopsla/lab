@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BITlog</string>
+    <string name="title_activity_main">Bitalino Storage App</string>
+    <string name="title_activity_log_store">LogStoreActivity</string>
+    <string name="title_activity_bitalino_config">BitalinoConfig</string>
+    <string name="textLabel">BITlog</string>
+    
+    <!-- Main Activity -->
+    
+    <string name="textViewBTDeviceLabel">Bluetooth devices: </string>
+    <string name="buttonBitalinoConf">Bitalino Configuration</string>
+    <string name="buttonLaunchStoreFiles">Internally Stored Files</string>
+    <string name="checkBoxSD">Use external storage</string>
+    <string name="chronometer1">Chronometer</string>
+    <string name="textViewFramesLabel">Number of frames read:  </string>
+    <string name="textViewFrames">0</string>
+    <string name="textViewFileLabel">File: </string>
+    <string name="textViewFileDefaultName">________________</string>
+    <string name="buttonStart">Start</string>
+    <string name="buttonStop">Stop</string>
+    
+    <!-- Bitalino Config Activity -->
+    
+    <string name="textViewSamplingRateLabel">Sampling Rate</string>
+    <string name="TextView01">Channel Selection:</string>
+    <string name="checkBoxCh1">1 - EMG</string>
+    <string name="checkBoxCh2">2 - EDA</string>
+    <string name="checkBoxCh3">3 - ECG</string>
+    <string name="checkBoxCh4">4 - ACC</string>    
+    <string name="checkBoxCh5">5 - LUX</string>
+    <string name="checkBoxCh6">6 - BATT</string>    
+    
+    <string name="checkBoxDout">"Digital Inputs [ I1, I2, I3, I4 ]"</string>
+    
+    <string-array name="sampling_rate">
+        <item>1</item>
+        <item>10</item>
+        <item>100</item>
+        <item>1000</item>
+    </string-array>
+	
+     <!-- Bitalino LogStore Activity -->
+    
+    <string name="textViewLogIndexLabel">Log index</string>
+    <string name="buttonSendLog">Send Email</string>
+    <string name="buttonDeleteLog">Delete Log</string>
+    
+    
+    
+</resources>
