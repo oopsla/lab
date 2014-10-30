@@ -47,6 +47,35 @@
                 android:layout_marginTop="8dp"
                 android:background="@android:color/darker_gray" />
 
+             <LinearLayout
+                android:id="@+id/ecgDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/ecgLabel"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.androidplot.xy.XYPlot
+                    android:id="@+id/ecgPlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    androidPlot.title="ecg" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+            
             <LinearLayout
                 android:id="@+id/activityDisplay"
                 android:layout_width="match_parent"

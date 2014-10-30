@@ -54,8 +54,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			Editor editor = myPrefs.edit();
 			editor.putBoolean(INITIALIZED, true);
 			editor.commit();
-		} else
-			startActivity(new Intent(this, Activity_Loading.class));			
+		} //else
+	//		startActivity(new Intent(this, Activity_Loading.class));			
 	}
 
 	@Override

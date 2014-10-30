@@ -1,5 +1,6 @@
 package com.oopsla.device;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 import android.content.Context;
@@ -10,6 +11,9 @@ import android.util.Log;
 import com.bitalino.comm.BITalinoDevice;
 import com.bitalino.comm.BITalinoException;
 import com.bitalino.comm.BITalinoFrame;
+import com.ooplsa.health.DataQueue;
+import com.ooplsa.health.ECG;
+import com.ooplsa.health.HR;
 import com.oopsla.common.Constants;
 
 /**
@@ -19,15 +23,16 @@ import com.oopsla.common.Constants;
  */
 public class BitalinoThread extends BTDeviceThread{
 
-	public final static String TAG ="BITalinoThread";
-	private int TIMER_INTERVAL = 50;
+	private final String BTDeviceThread ="BTDeviceThread";
+	private final String BTDeviceThread_HR = "BTDeviceThread_HR";
+	
 	private int sample_rate;
-	private int nFrames; //내 생각에 프레임은 각각의 데이터를 말하는 것 같다.
-	private int packNum;
-//	private int bitalinoMode; 
-	private Queue<BITalinoFrame> frame_queue; // 데이터 값을 저장할 프레임
+	private int nFrames; //내 생각에 프레임은 각각의 데이터를 말하는 것 같다.	
+	private Queue<Integer> ecg_queue; // 데이터 값을 저장할 프레임
 	private SharedPreferences sharedPreferences; 
 	private boolean downsample = false;
+	private HR hR;
+	private int heart_rate = 0; //맥박
 	
 	private BITalinoDevice _bitalino_dev = null;
 	
@@ -46,30 +51,21 @@ public class BitalinoThread extends BTDeviceThread{
 		//디바이스를 설정함
 		super.initComm();
 		
+		ecg_queue = new LinkedList<Integer>();
+		hR = new HR(); //맥박 클래스
 		sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 	}
-	
-//	public void setLed(boolean val){
-//		int led = (val) ? 1 : 0;
-//		int[] digOutputs = {0, 0, led, 0};
-//		try {
-//			_bitalino_dev.setDigitalOutput(digOutputs);
-//		} catch (BITalinoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	
 	int[] channels; 
 	public void setChannels(int[] channels){
 		this.channels = channels;
 	}
 	
+	
 	@Override
 	public void initialize() {
 		super.initialize();
-		 
-		packNum = 0;
+		 		
 		_bitalino_dev = null;
 
 		try {
@@ -77,35 +73,12 @@ public class BitalinoThread extends BTDeviceThread{
 			//데이터 송수신을 위한 프로토콜 open
 			_bitalino_dev.open(_inStream, _outStream);		
 			
-			//String firmVersion = _bitalino_dev.version();
-			//Log.v(TAG, "Firm Version: "+firmVersion);
-			
-			//_bitalino_dev.setBattThreshold(3.8); // Only Works in LIVE MODE
-						
-//			_bitalino_dev.start(this.bitalinoMode, channels);
 			//데이터 받기 시작. 정의된 채널로부터 데이터 수집을 시작함
-			_bitalino_dev.start();
-		
-			// Led in the Bitalino Boards, blinks twice
-//			if(_bitalino_dev.getMode()==BITalinoDevice.LIVE_MODE){
-//				setLed(true);
-//				Thread.sleep(100);
-//				setLed(false);
-//				Thread.sleep(50);
-//				setLed(true);
-//				Thread.sleep(100);
-//				setLed(false);
-//			}
-					
-			
+			_bitalino_dev.start();		
 			
 		} catch (BITalinoException e2) {
 			e2.printStackTrace();
-		}
-//		catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}   		
+		}	
 	}
 
 	//상위클래스로부터 run을 상속받음. run에서 loop를 호출 함 
@@ -113,16 +86,25 @@ public class BitalinoThread extends BTDeviceThread{
 	public void loop() {
 		try {		
 			
-			//Blocking task . nFrames는 BITlog에서 frameRate이다. 
-			BITalinoFrame frames = new BITalinoFrame;
+			//Blocking task . nFrames는 BITlog에서 frameRate이다.			
+			BITalinoFrame[] frames = new BITalinoFrame[BITlog.SamplingRate];
+			DataQueue[] dataQueues = new DataQueue[4];
 			
-			//패킷 갯수당 시간 , 루프 한번 돌 때마다 데이터 프레임 하나씩 증가.
-			Log.i(TAG, "Monitor: Read "+(packNum++)+" :"+ System.currentTimeMillis());
-			//ApplicationClass.showTop();
-			
-			//루프 한번 돌 때마다 받는 데이터의 수를 1개
+			//1초동안 받는 샘플 데이터 수를 읽어옴
 			frames = _bitalino_dev.read(nFrames);
-			
+			Log.e(BTDeviceThread, "ddddddddd1");
+			  //read 2 seconds
+            for (int i=0; i <4; i++){
+                dataQueues[i] = new DataQueue(BITlog.SamplingRate / 2);
+                for (BITalinoFrame frame : frames) {
+                    dataQueues[i].push(frame.getAnalog(2));
+                }
+            }
+    		Log.e(BTDeviceThread, "ddddddddd12");
+    		
+            processInThread(dataQueues);
+    		Log.e(BTDeviceThread, "ddddddddd13");
+			//false이므로 동작하지 않음
 			if(downsample){
 				BITalinoFrame[] halfFrames = new BITalinoFrame[nFrames/2];
 				for(int i = 0; i<halfFrames.length; i++){
@@ -131,29 +113,52 @@ public class BitalinoThread extends BTDeviceThread{
 				frames = halfFrames;
 				//Log.v(TAG, "Downsample: enable");
 			}
-
-			//큐에다가 데이터 저장
-			for(int i = 0; i < nFrames; i++)
-				frame_queue.add(frames[i]);
+			
+			for(int i = 0; i < nFrames; i++){
+				ecg_queue.add(frames[i].getAnalog(2));
+			}
 			
 			int secsToDisplay = Integer.parseInt(sharedPreferences.getString(Constants.PREF_GRAPH_SECONDS,
 					Constants.DEFAULT_GRAPH_RANGE));
-			int numberExtraAudioSamples = frame_queue.size() - secsToDisplay * 1000 / TIMER_INTERVAL;
-		//	Log.e("TAG","numberExtraSample:"+numberExtraAudioSamples);
-			if (numberExtraAudioSamples > 0) {
-				for (int i = 0; i < numberExtraAudioSamples; i++) {
-					frame_queue.remove();
-				//	Log.e("TAG", "오디오 사이즈 제거: " + audioQueue.size());
+			int numberExtraEcgSamples = ecg_queue.size() - secsToDisplay * Constants.PARAM_ECG_SAMPLERATE;
+			if (numberExtraEcgSamples > 0) {
+				for (int i = 1; i < numberExtraEcgSamples; i++) {
+					ecg_queue.remove();
 				}
 			}
-
 		} catch (BITalinoException e1) {
-			Log.e(TAG, "Error with Bitalino");
+			Log.e(BTDeviceThread, "Error with Bitalino");
 			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+	        Log.e(BTDeviceThread, "There was an error.", e);
 		}
-
 	}
 
+	 public void processInThread(final DataQueue [] dataQueues) throws Exception{
+	        Runnable processor = (new Runnable(){
+	            public void run(){
+	                synchronized (hR) {
+	                    ECG ecg= new ECG();
+	                    for (int i = 0; i < 4; i++) {
+	                        ecg.pushbulk(dataQueues[i].queue);
+	                        ecg.DetectPeak();
+	                        dataQueues[i].Clear();
+	                        hR.CalcHR_ECG(ecg);
+	                        ecg.ResetNewPeaks();
+	                    }
+	                    if (hR.HROK){
+	                    	heart_rate = hR.HRV; //추출되는 맥박 값	      
+	                    	Log.e(BTDeviceThread_HR,"맥박 : "+ heart_rate);
+	                    }else{
+	                       Log.e(BTDeviceThread_HR,"Processing ecg. Please wait... ");
+	                    }
+	                }
+	            }
+	        });
+	        processor.run();
+	    }
+	 
 	@Override
 	public void close() {
 		
@@ -167,7 +172,7 @@ public class BitalinoThread extends BTDeviceThread{
 //				}
 				_bitalino_dev.stop();
 			} catch (BITalinoException e) {
-				Log.e(TAG, "Problems closing the BITalino device");
+				Log.e(BTDeviceThread, "Problems closing the BITalino device");
 				e.printStackTrace();
 //			} catch (InterruptedException e) {
 //				// TODO Auto-generated catch block
@@ -189,19 +194,19 @@ public class BitalinoThread extends BTDeviceThread{
 		return nFrames;
 	}
 
-	//BITlog에서 frameRate로 초기화
+	//BITlog에서 frameRate로 초기화 샘플링 레이트가 200일 때 60개 저장 됨 
 	public void setNumFrames(int nFrames) {
 		this.nFrames = nFrames;
 	}	
 	
-	public Queue<BITalinoFrame> getQueue(){
-		return frame_queue;
+	public Queue<Integer> getQueue(){
+		return ecg_queue;
 	}
 
 //	public void setMode(int Mode){
 //			this.bitalinoMode = Mode;
 //	}
-	
+	//false가 저장됨.
 	public void setDownsamplingOn(boolean downsample){
 		this.downsample = downsample;
 		

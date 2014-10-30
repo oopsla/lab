@@ -61,7 +61,8 @@
     <string name="ok">확인</string>
     <string name="estimatedPosition">예상 자세:</string>
     <string name="mac_address">MAC 주소</string>
-   
+    <string name="ecgLabel">ECG</string>
+
     <!-- 분석 -->
     <string name="dataChoiceInstructions">분석에 사용할 데이터를 선택하세요.</string>
     <string name="movementLabel">자세</string>

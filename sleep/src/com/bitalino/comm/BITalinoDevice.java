@@ -113,7 +113,7 @@ public class BITalinoDevice {
   public void start() throws BITalinoException {
     int bit = 1;
     for (int channel : analogChannels)
-      bit = bit | 1 << (2 + channel); //????
+      bit = bit | 1 << (2 + channel); 
     try {
       socket.write(bit);
     } catch (Exception e) {

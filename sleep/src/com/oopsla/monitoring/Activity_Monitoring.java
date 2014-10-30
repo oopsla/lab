@@ -155,7 +155,7 @@ public class Activity_Monitoring extends Activity implements
 	private boolean finishRecordingFlag;
 	private ImageView recordingSign;
 	private boolean screenLocked;
-	private boolean actigraphyEnabled, audioEnabled;
+	private boolean actigraphyEnabled, audioEnabled, ecgEnabled;
 	private long recordingStartDelayMs, recordingDurationMs;
 	
 	private int apnea_Count = 0;
@@ -223,33 +223,49 @@ public class Activity_Monitoring extends Activity implements
 	private class UserInterfaceUpdater extends AsyncTask<Void, Void, String> {
 		private XYPlot _activityPlot;
 		private XYPlot _audioPlot;
+		private XYPlot _ecgPlot;
+		
 		// private XYPlot _breathPlot;
 		private boolean _stopRunningFlag;
 		private int _counter;
 		private PointLabelFormatter _plf;
 		private LineAndPointFormatter _activityFormatter;
 		private LineAndPointFormatter _audioFormatter;
+		private LineAndPointFormatter _ecgFormatter;	
+		
 		// private LineAndPointFormatter _breathFormatter;
 		// private XYSeries _breathSeries;
 		private XYSeries _activitySeries;
 		private XYSeries _audioSeries;
+		private XYSeries _ecgSeries;
 
 		@Override
 		protected String doInBackground(Void... params) {
 			// Graph module
 			_activityPlot = (XYPlot) findViewById(R.id.activityPlot);
 			_audioPlot = (XYPlot) findViewById(R.id.audioPlot);
+			_ecgPlot = (XYPlot) findViewById(R.id.ecgPlot);
+			
 			// _breathPlot = (XYPlot) findViewById(R.id.breath_count);
 
 			_plf = new PointLabelFormatter(getResources().getColor(
 					R.color.transparent));
 			_activityFormatter = new LineAndPointFormatter(getResources()
 					.getColor(R.color.darkgreen), null, getResources()
-					.getColor(R.color.translucentDarkGreen), _plf);
+					.getColor(R.color.transparent), _plf);
 			_audioFormatter = new LineAndPointFormatter(Color.BLUE, null,
-					getResources().getColor(R.color.translucentBlue), _plf);
-
+					getResources().getColor(R.color.transparent), _plf);
+			_ecgFormatter = new LineAndPointFormatter(Color.RED, null, 
+					getResources().getColor(R.color.transparent), _plf);
+			
 			//활동사항
+			if(ecgEnabled){
+				initialisePlot(_ecgPlot);
+			}
+			else{
+				((LinearLayout) findViewById(R.id.ecgDisplay))
+				.setVisibility(View.GONE);
+			}
 			if (actigraphyEnabled) {
 				Log.e("test", "actigraphy");
 				initialisePlot(_activityPlot);
@@ -294,7 +310,6 @@ public class Activity_Monitoring extends Activity implements
 							startRecordingFlag = true;
 							if (audioEnabled) {
 								// 오디오 레코드 기록하도록 플래그 값을 true로 만들어줌
-								extAudioRecorder.setShouldWrite(true);
 							}
 							if (delayAlertDialog != null) {
 								delayAlertDialog.cancel();
@@ -369,7 +384,7 @@ public class Activity_Monitoring extends Activity implements
 		protected void onProgressUpdate(Void... progress) {
 
 			if (finishRecordingFlag) {
-				stopRecording();
+				stopRecording();	
 			} else {
 				if (startRecordingFlag
 						&& recordingSign.getVisibility() == View.GONE) {
@@ -381,6 +396,16 @@ public class Activity_Monitoring extends Activity implements
 				// Only bother updating the UI if the screen is currently
 				// unlocked.
 				try {
+					if(ecgEnabled){
+						Queue<Integer> ecgQueue = bitalinoThread.getQueue();				
+						List<Number> ecgVals = integerQueueToNumberList(ecgQueue);
+						_ecgSeries = new SimpleXYSeries(ecgVals,
+								ArrayFormat.Y_VALS_ONLY, "");
+						_ecgPlot.removeSeries(_ecgSeries);
+						_ecgPlot.clear();
+						_ecgPlot.addSeries(_ecgSeries, _ecgFormatter);
+						_ecgPlot.redraw();
+					}
 					// Activity.
 					if (actigraphyEnabled) {
 						List<Number> activityVals = doubleQueueToNumberList(actigraphyQueue);
@@ -440,7 +465,6 @@ public class Activity_Monitoring extends Activity implements
 					}
 					// 무호흡을 출력함
 					if (true) {
-						Log.e("texView", "dddddddddddddddddddddddddddddddddddd");
 						apneaText.setText(getString(R.string.apneaLabel)
 								+ apnea_Count);
 					}
@@ -510,16 +534,15 @@ public class Activity_Monitoring extends Activity implements
 					unhandledFileName));
 		}
 
-		configureBitalino(); //bitalinoThread 객체 초기화하는 메소드.
-		
 		// 자세정보, 오디오 그래프 출력을 위한 정보들
 		actigraphyEnabled = true;
 		audioEnabled = true;
+		ecgEnabled = true;
 
 		// 현재 시간을 해당 데이터 형식으로 가져옴
 		dateTimeString = DateFormat.format(Constants.PARAM_DATE_FORMAT,
 				System.currentTimeMillis()).toString();
-
+//
 		// 센서 사용을 위해 서비스 가져와서 센서 가져옴
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		accelerometer = sensorManager
@@ -572,7 +595,7 @@ public class Activity_Monitoring extends Activity implements
 			}
 		});
 
-		// 레코딩을 위해 파일 생성하고 여분의 기록을 삭제하는 모듈
+		// 레코딩을 위해 파일 생성하고 여분의 기록을 삭제하는 모듈  
 		File dir = new File(filesDirPath);
 		if (!dir.exists()) {
 			dir.mkdirs();
@@ -752,23 +775,18 @@ public class Activity_Monitoring extends Activity implements
 		}
 
 		/*
-		 * 오디오 레코딩 시작. 이전 액티비티에서 가져온 가져온 오디오 플래그 값. 오디오는 따로 스레드 돌려서 녹음함, 지금 당장
+		 * 오디오, ecg 설정 및 스레드 시작. 이전 액티비티에서 가져온 가져온 오디오 플래그 값. 오디오는 따로 스레드 돌려서 녹음함, 지금 당장
 		 * 녹음하지 않고 UserInterface스레드에서 녹음을 시작하는 플래그를 전달함 -> 이유는 수면상태에서의 호흡을
 		 * 기록해야하므로 인터페이스덥댓 스레드에서 루프 돌리는데 시간을 체크함 수면중에만 측정
 		 */
 
-		if (audioEnabled) {
-			// 오디오 레코더 객체 획득.
-			extAudioRecorder = new ExtAudioRecorder(this);
-
-			// 저호흡증과 무호흡증 콜백메소드 등록.
-			extAudioRecorder.setApnea(a_Callback);
-
-			// 기본 경로에 생성한 audioRawFile 파일에 레코드함.
-			extAudioRecorder.setOutputFile(audioRawFile);
-			extAudioRecorder.setShouldWrite(startRecordingFlag); // 시작함을 의미하는
-			extAudioRecorder.setAudioProcessedFile(audioProcessedFile);
-			extAudioRecorder.prepare();
+		if(ecgEnabled){
+			configureBitalino();
+			bitalinoThread.start();
+		}
+		
+		if (audioEnabled) {			
+			configureAudio();
 			extAudioRecorder.start(); // 스레드 시작
 		}
 
@@ -795,25 +813,39 @@ public class Activity_Monitoring extends Activity implements
 		graphUpdateTask = new UserInterfaceUpdater();
 		graphUpdateTask.execute();
 	}
+	
+	private void configureAudio(){
+		// 오디오 레코더 객체 획득.
+		extAudioRecorder = new ExtAudioRecorder(this);
+
+		// 저호흡증과 무호흡증 콜백메소드 등록.
+		extAudioRecorder.setApnea(a_Callback);
+		// 기본 경로에 생성한 audioRawFile 파일에 레코드함.
+		extAudioRecorder.setOutputFile(audioRawFile);
+		extAudioRecorder.setShouldWrite(startRecordingFlag); // 시작함을 의미하는
+		extAudioRecorder.setAudioProcessedFile(audioProcessedFile);
+		extAudioRecorder.prepare();
+	}
 
 	private void configureBitalino() {
 		try {
-
 			bitalinoThread = new BitalinoThread(BITlog.MAC, this);
 			// Configure the devicesddd
-ddd
+
 			bitalinoThread.setChannels(BITlog.channels);
 
-			//여기서 말하는 샘플링이 무엇을 의미하는지 잘 모르겠다.
+			//BITlog의 samplingrate값이 저장 됨 200
 			bitalinoThread.setSampleRate(BITlog.SamplingRate);
 			Log.e("bitaLINO_configureBitalino",  ""+ BITlog.SamplingRate);
 		
-			// Calculate frame number: ?? 프레임넘버를 계산??
-			BITlog.frameRate = 1;
-			if (BITlog.SamplingRate > 1) {
-				BITlog.frameRate = 3 * BITlog.SamplingRate / 10;
+			// 화면에 보여지는 데이터 갯수.
+			BITlog.frameRate = 1; 
+			if (BITlog.SamplingRate > 1) {			
+				BITlog.frameRate =  3 * BITlog.SamplingRate / 10;
+				Log.e("Activity_Monitoring", "frame rate"+ BITlog.frameRate);
 			}
 
+			//sampling rate가 200개이면 frame rate 60개가 저장 됨
 			bitalinoThread.setNumFrames(BITlog.frameRate);
 			bitalinoThread.setDownsamplingOn(false);
 			// bitalinoThread.setMode(BITalinoDevice.LIVE_MODE);
@@ -823,6 +855,7 @@ ddd
 			e.printStackTrace();
 		}
 	}
+	
 	// 액티비티 시작
 	@Override
 	protected void onStart() {
@@ -833,7 +866,7 @@ ddd
 	// 액티비티 비활성
 	@Override
 	protected void onStop() {
-		screenLocked = true;
+		screenLocked = true;		
 		super.onStop();
 	}
 
@@ -879,6 +912,11 @@ ddd
 		if (actigraphyEnabled) {
 			// 리스너 객체 등록해제
 			sensorManager.unregisterListener(this);
+		}
+		
+		if (ecgEnabled){
+			bitalinoThread.finalizeThread();
+			bitalinoThread.close();
 		}
 
 		try {
@@ -1006,8 +1044,8 @@ ddd
 							+ zAccel * zAccel;
 					double magnitude = Math.sqrt(magnitudeSquare);
 
-					actigraphyQueue.add(magnitude); // 가속도 정보
-					Log.e("tag","가솏도 ; "+ actigraphyQueue.size());
+					actigraphyQueue.add(magnitude); // 가속도 
+					
 					int secsToDisplay = Integer.parseInt(sharedPreferences
 							.getString(Constants.PREF_GRAPH_SECONDS,
 									Constants.DEFAULT_GRAPH_RANGE));
@@ -1245,6 +1283,31 @@ ddd
 		}
 	}
 
+	private List<Number> integerQueueToNumberList(Queue<Integer> queue) {
+		List<Number> list;
+		// If the Queue is modified while the loop is running (which is more
+		// than possible), a ConcurrentModificationException will be thrown.
+		// If one is, it is caught and we try again.
+		int attempts = 0;
+		while (attempts < 5) {
+			try {
+				list = new ArrayList<Number>();
+				for (Iterator<Integer> iter = queue.iterator(); iter.hasNext();) {
+					Integer obj = iter.next();
+					list.add(obj);
+				}
+				return list;
+			} catch (ConcurrentModificationException e) {
+				// Don't return anything so we go through the while loop again.
+				attempts++;
+			}
+		}
+		list = new ArrayList<Number>();
+		list.add(0);
+		list.add(0);
+		return list;
+	}
+	
 	private List<Number> doubleQueueToNumberList(Queue<Double> queue) {
 		List<Number> list;
 		// If the Queue is modified while the loop is running (which is more

@@ -84,6 +84,9 @@ public class Constants {
 	public static final float PARAM_ACTIVITY_GRAPH_MIN_Y = -0.5f;
 	public static final float PARAM_AUDIO_GRAPH_MAX_Y = 5000;
 	public static final float PARAM_AUDIO_GRAPH_MIN_Y = -5000;
+	public static final float PARAM_ECG_GRAPH_MIN_Y = 1000;
+	public static final float PARAM_ECG_GRAPH_MAX_Y = -1000;
+	public static final int PARAM_ECG_SAMPLERATE = 100; //hz
 	public static final String PARAM_DATE_FORMAT = "yyyyMMddkkmmss";
 	
 	// Codes.
